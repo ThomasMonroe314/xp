@@ -11,7 +11,7 @@ local mod_storage = minetest.get_mod_storage()
 local blue = minetest.get_color_escape_sequence("#0000ff")
 
 function xp.levelfunc(level)
-	return math.floor(1.15^level)+100
+	return (math.floor(1.15^level)+100)
 end
 
 function xp.add_xp(player,XP)
