@@ -36,7 +36,7 @@ function xp.update_hud(player,level,XP)
 			position = {x = 0, y = 0.5},
 			offset = {x = 10, y = 0},
 			scale = {x = 100, y = 100},
-			text = "Level: "..level.."\nXP: "..XP.."\nXP needed: "..(math.floor(1.15^level)+100-XP),
+			text = "Level: "..level.."\nXP: "..XP.."\nXP for next level: "..(math.floor(1.15^level)+100),
 			number = 0xFFFFFF,
 			alignment = {x = 1, y = 0.5},
 			direction = 2,
