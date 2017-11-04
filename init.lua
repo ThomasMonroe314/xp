@@ -26,7 +26,7 @@ function xp.add_xp(player,XP)
 		mod_storage:set_int(name.."_level",level)
 		player:set_nametag_attributes({text = name.."  "..blue..level})
 	end
-	if temp~=level then
+	if temp~=level and math.mod(level,5)==0 then
 		minetest.chat_send_all(name.." reached level " ..level.."!")
 	end
 	xp.xp[name] = XP
