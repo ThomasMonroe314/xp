@@ -19,8 +19,8 @@ function xp.add_xp(player,XP)
 	XP = xp.xp[name]+XP
 	local level = xp.level[name]
 	local temp = level
-	if (xp.levelfunc(level)+100-XP)<1 then
-		XP = XP-(xp.levelfunc(level)+100)
+	if (xp.levelfunc(level)-XP)<1 then
+		XP = XP-(xp.levelfunc(level))
 		level = level+1
 		xp.level[name] = level
 		mod_storage:set_int(name.."_level",level)
