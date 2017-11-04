@@ -10,16 +10,24 @@ xp.huds = {}
 local mod_storage = minetest.get_mod_storage()
 local blue = minetest.get_color_escape_sequence("#0000ff")
 
+function xp.levelfunc(level)
+	return math.floor(1.15^level)+100
+end
+
 function xp.add_xp(player,XP)
 	local name = player:get_player_name()
 	XP = xp.xp[name]+XP
 	local level = xp.level[name]
-	if (math.floor(1.15^level)+100-XP)<1 then
-		XP = XP-(math.floor(1.15^level)+100)
+	local temp = level
+	if (xp.levelfunc(level)+100-XP)<1 then
+		XP = XP-(xp.levelfunc(level)+100)
 		level = level+1
 		xp.level[name] = level
 		mod_storage:set_int(name.."_level",level)
-		player:set_nametag_attributes({text = name.."\n"..blue..level})
+		player:set_nametag_attributes({text = name.."  "..blue..level})
+	end
+	if temp~=level then
+		minetest.chat_send_all(name.." reached level " ..level.."!")
 	end
 	xp.xp[name] = XP
 	mod_storage:set_int(name.."_xp",XP)
@@ -41,12 +49,10 @@ function xp.update_hud(player,level,XP)
 			alignment = {x = 1, y = 0.5},
 			direction = 2,
 		})
-		minetest.chat_send_all("test")
 	end
 end
 
 minetest.register_on_joinplayer(function(player)
-	minetest.chat_send_all("test")
 	local name = player:get_player_name()
 	local level = mod_storage:get_int(name.."_level")
 	local XP = mod_storage:get_int(name.."_xp")
